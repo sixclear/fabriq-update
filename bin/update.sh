@@ -18,11 +18,11 @@ if [ ${machine} = "Linux" ]; then
   COMMAND=bin/linux/fetch
 fi
 
-${COMMAND} --github-oauth-token="${token}" --repo="https://github.com/sixclear/${project}" --tag="${tag}" --release-asset="fabriq-release.tar.gz" .
+${COMMAND} --github-oauth-token="${token}" --repo="https://github.com/sixclear/${project}" --tag="${tag}" --release-asset="fabriq-platform-server-release.tar.gz" .
 
-HASH=$(cksum fabriq-release.tar.gz | awk '{print $1}');
+HASH=$(cksum fabriq-platform-server-release.tar.gz | awk '{print $1}');
 DATE=`date +%Y-%m-%d-%T`;
 
-mkdir -p updates/fabriq-release-${tag}-${DATE}-${HASH}
+mkdir -p updates/fabriq-platform-server-release-${tag}-${DATE}-${HASH}
 
-tar -C updates/fabriq-release-${DATE}-${HASH} --strip-components 1 -zxvf fabriq-release.tar.gz
+tar -C updates/fabriq-platform-server-release-${DATE}-${HASH} --strip-components 1 -zxvf fabriq-platform-server-release.tar.gz
