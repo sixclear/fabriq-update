@@ -22,4 +22,4 @@ bin/update.sh --token=3ae575f67c71c24ec65qcde08f024e040dea2861 --tag=v1.1 --proj
 The update script will download the version tag you pass and will decompress it into the `updates` directory with
 a unique name of `fabriq-release-[TAG]-[DATETIME]-[CHECSKSUM]`.
 
-To deploy the version, `cd` into the release directory and follow the deploy instructions in the README.txt.
+To deploy the version, `cd` into the release directory and follow the deploy instructions in the README.md.
