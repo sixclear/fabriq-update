@@ -25,4 +25,4 @@ DATE=`date +%Y-%m-%d-%T`;
 
 mkdir -p updates/fabriq-platform-server-release-${tag}-${DATE}-${HASH}
 
-tar -C updates/fabriq-platform-server-release-${DATE}-${HASH} --strip-components 1 -zxvf fabriq-platform-server-release.tar.gz
+tar -C updates/fabriq-platform-server-release-${tag}-${DATE}-${HASH} --strip-components 1 -zxvf fabriq-platform-server-release.tar.gz
