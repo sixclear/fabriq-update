@@ -1,24 +1,9 @@
 source bin/argparse.sh
 parse_args "$@"
 
-unameOut="$(uname -s)"
-case "${unameOut}" in
-    Linux*)     machine=Linux;;
-    Darwin*)    machine=Mac;;
-    CYGWIN*)    machine=Cygwin;;
-    MINGW*)     machine=MinGw;;
-    *)          machine="UNKNOWN:${unameOut}"
-esac
-
-if [ ${machine} = "Mac" ]; then
-  COMMAND=bin/mac/fetch
-fi
-
-if [ ${machine} = "Linux" ]; then
-  COMMAND=bin/linux/fetch
-fi
-
-${COMMAND} --github-oauth-token="${token}" --repo="https://github.com/sixclear/${project}" --tag="${tag}" --release-asset="fabriq-platform-server-release.tar.gz" .
+(export AUTH_TOKEN=${token}; \
+ export ASSET_ID=$(wget -O - https://api.github.com/repos/sixclear/${project}/releases/tags/${tag}?access_token=$AUTH_TOKEN | python -c 'import sys, json; print json.load(sys.stdin)["assets"][0]["id"]'); \
+ wget --header='Accept:application/octet-stream' -O fabriq-platform-server-release.tar.gz https://api.github.com/repos/sixclear/${project}/releases/assets/$ASSET_ID?access_token=$AUTH_TOKEN)
 
 HASH=$(cksum fabriq-platform-server-release.tar.gz | awk '{print $1}');
 DATE=`date +%Y-%m-%d-%T`;
